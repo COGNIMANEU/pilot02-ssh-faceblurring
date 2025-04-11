@@ -60,6 +60,7 @@ Feel free to open issues or submit pull requests. Contributions are welcome!
 
 This project is licensed under GNU AFFERO GENERAL PUBLIC LICENSE. Depending on the usage, additional licenses must be considered:
 
+- BSD 3-Clause License (when using rosboard)
 - MIT License (when using deface)
 - Intel License Agreement For Open Source Computer Vision Library (when using haar)
 - MIT License (when using mtcnn)
