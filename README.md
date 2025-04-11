@@ -48,12 +48,9 @@ Run:
 docker-compose up --build
 ```
 
-After execution, you will be able to see at [Rosboard →](https://localhost:8888) this demo:
+After execution, you will be able to see at [Rosboard →](https://localhost:8888) this demo (download video at https://raw.githubusercontent.com/COGNIMANEU/pilot02-ssh-faceblurring/main/test/faceblurringtest.mp4):
 
-<video width="640" height="360" controls>
-  <source src="https://github.com/COGNIMANEU/pilot02-ssh-faceblurring/blob/main/test/faceblurringtest.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Face Blurring Demo](./test/faceblurringtest.gif)
 
 ## Contributing
 
