@@ -1,0 +1,65 @@
+services:
+  rosboard:
+    build: 
+      context: ./rosboard
+    container_name: rosboard
+    command: >
+      bash -c "source /opt/ros/humble/setup.sh &&
+      ros2 run rosboard rosboard_node"
+    ports:
+      - "8888:8888" 
+
+  face_blur_yolov5:
+    build:
+      context: ./faceblurring
+    container_name: face_blur_yolov5
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    command: >
+      bash -c "source /opt/ros/humble/setup.sh &&
+      exec python3 /app/face_blur.py yolov5 /video_frames /blurred_faces_yolov5"
+
+  face_blur_haar:
+    build:
+      context: ./faceblurring
+    container_name: face_blur_haar
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    command: >
+      bash -c "source /opt/ros/humble/setup.sh &&
+              exec python3 /app/face_blur.py haar /video_frames /blurred_faces_haar"
+
+  face_blur_mtcnn:
+    build:
+      context: ./faceblurring
+    container_name: face_blur_mtcnn
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    command: >
+      bash -c "source /opt/ros/humble/setup.sh &&
+      exec python3 /app/face_blur.py mtcnn /video_frames /blurred_faces_mtcnn"
+
+  face_blur_deface:
+    build:
+      context: ./faceblurring
+    container_name: face_blur_deface
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    command: >
+      bash -c "source /opt/ros/humble/setup.sh &&
+      exec python3 /app/face_blur.py deface /video_frames /blurred_faces_deface"
+
+  video_publisher:
+    build: 
+      context: ./videopublisher
+    container_name: video_publisher
+    volumes:
+      - ./videopublisher/demo.mp4:/ros_ws/demo.mp4
+    depends_on:
+      - rosboard
+      - face_blur_yolov5
+      - face_blur_haar
+      - face_blur_mtcnn
+      - face_blur_deface
+
+
